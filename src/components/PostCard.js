@@ -1,8 +1,14 @@
 import React from 'react';
 import { Card } from "react-bootstrap";
 import '../styles/PostCard.css';
+import {useNavigate} from "react-router-dom";
 
-export default function PostCard({ username, profileImageUrl, postImageUrl, postDescription, postCreatedAt}) {
+export default function PostCard({ userId, username, profileImageUrl, postImageUrl, postDescription, postCreatedAt}) {
+    const navigate = useNavigate();
+    const handleProfileClick = () => {
+        navigate(`/profile/${userId}`);
+    };
+
     return (
         <Card style={{ width: '18rem' }} className="mb-3 shadow rounded-4">
             <Card.Header className="bg-teal text-white text-start">
@@ -11,9 +17,14 @@ export default function PostCard({ username, profileImageUrl, postImageUrl, post
                         src={profileImageUrl}
                         alt="Profile"
                         className="rounded-circle profile-picture me-2"
+                        onClick={handleProfileClick}
+                        style={{cursor: 'pointer'}}
                     />
-
-                    {username}
+                    <Card.Text
+                        onClick={handleProfileClick}
+                        style={{cursor: 'pointer'}}>
+                            {username}
+                    </Card.Text>
                 </div>
             </Card.Header>
             <Card.Body className="text-start">

@@ -1,8 +1,18 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import '../styles/ProfileCard.css';
+import {useNavigate} from "react-router-dom";
 
-function ProfileCard({ userName, email, registeredAt, dob, profilePictureUrl, bio }) {
+function ProfileCard({ userId, userName, email, registeredAt, dob, profilePictureUrl, bio }) {
+    const navigate = useNavigate();
+
+    const handleFriendshipsClick = () => {
+        navigate(`/friendships/${userId}`);
+    }
+    const handlePostsClick = () => {
+        navigate(`/posts/users/${userId}`);
+    }
+
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <Card style={{ width: '22rem', borderRadius: '15px' }} className="mb-3 shadow-lg">
@@ -31,10 +41,10 @@ function ProfileCard({ userName, email, registeredAt, dob, profilePictureUrl, bi
                     </div>
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-around">
-                    <Button className="profile-buttons rounded-4" variant="outline-teal">
+                    <Button className="profile-buttons rounded-4" variant="outline-teal" onClick={handleFriendshipsClick}>
                         Friends
                     </Button>
-                    <Button className="profile-buttons rounded-4" variant="outline-teal">
+                    <Button className="profile-buttons rounded-4" variant="outline-teal" onClick={handlePostsClick}>
                         Posts
                     </Button>
                 </Card.Footer>

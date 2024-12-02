@@ -1,15 +1,16 @@
 import React from "react";
 import '../styles/MySideBar.css';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({userId}) {
 
+    // const {userId} = useParams();
     const navigate = useNavigate();
     const handleLogoClick = () => (
         navigate("/")
     )
     const handleProfileClick = () => (
-        navigate("/profile")
+        navigate(`/profile/${userId}`)
     )
 
     return (

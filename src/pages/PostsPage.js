@@ -4,11 +4,13 @@ import { getData } from "../services/api-services";
 import { format } from 'date-fns';  // Import date-fns
 import '../styles/HomePage.css';
 import PostCard from "../components/PostCard";
+import {useParams} from "react-router-dom";
 
-export default function HomePage() {
+export default function PostsPage() {
+    const {userId} = useParams();
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
-    const API_URL = "http://localhost:8080/posts";
+    const API_URL = `http://localhost:8080/posts/users/${userId}`;
 
     useEffect(() => {
         fetchPosts();

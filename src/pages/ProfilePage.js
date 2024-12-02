@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getData } from "../services/api-services";
 import ProfileCard from "../components/ProfileCard";
-import { format } from 'date-fns'; // Import date-fns for date formatting
+import { format } from 'date-fns';
+import {useParams} from "react-router-dom"; // Import date-fns for date formatting
 
-function ProfilePage({ userId }) {
+function ProfilePage() {
+    const {userId} = useParams();
     const [profile, setProfile] = useState({});
     const [error, setError] = useState(null);
     const API_URL = `http://localhost:8080/users/${userId}`;
@@ -35,6 +37,7 @@ function ProfilePage({ userId }) {
                 <p className="text-danger">Error: {error}</p>
             ) : (
                 <ProfileCard
+                    userId={profile.userId}
                     userName={profile.userName}
                     email={profile.email}
                     registeredAt={registeredAtFormatted}
